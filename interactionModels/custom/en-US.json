@@ -59,6 +59,21 @@
         },
         {
           "slots": [],
+          "name": "TrajeTipicoIntent",
+          "samples": [
+            "typical costume in san felipe orizatlan",
+            "What is the typical costume in San Felipe Orizatlan"
+          ]
+        },
+        {
+          "slots": [],
+          "name": "PersonajesIntent",
+          "samples": [
+            "Important characters of San Felipe Orizatlan"
+          ]
+        },
+        {
+          "slots": [],
           "name": "MusicaTipicaIntent",
           "samples": [
             "typical music of San Felipe Orizatlan",

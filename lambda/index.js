@@ -28,7 +28,9 @@ const languageStrings = {
             LUGARES_MESSAGE: 'You can visit very beautiful places in San Felipe Orizatlán and do different activities, such as swimming in the Dam, camping in the Encinal cabins, swimming next to the Tultitlán waterfall, visiting Rancho Tuzuntla or hiking in the famous Cerro de Talol',
             COMIDA_MESSAGE: 'When you visit San Felipe Orizatlán, you can try the delicious traditionally made bread, the delicious Enchiladas, delicious Tamales, among other typical foods of the region.',
             MUSICA_MESSAGE: 'In San Felipe Orizatlán the typical music is the huapangos, a singing band, among others.',
-
+            TRAJE_MESSAGE: 'The typical costume of men in San Felipe Orizatlán includes a pair of underwear and blanket cotton, a tancoco palm hat, cross-strap huaraches made in the municipality of Jaltocán, and a red scarf inserted pointedly at the waist. Women wear a plain or printed ankle-length skirt decorated with lace and tucks, and their hair is usually braided with ribbons and adorned with fancy necklaces.',
+            PERSONAJE_MESSAGE: 'San Felipe Orizatlán is also known by some prominent figures, such as Professor Ildefonso Maya, who is recognized for his knowledge of indigenous cosmogony and the community\'s relationship with agricultural cycles. He is quoted describing the agricultural activities and rituals that mark the community\'s calendar, especially around the Xantolo festivities, which is the local Day of the Dead festival, characterized by its rich cultural tradition and activities that include dances, offerings and other community rituals.',
+            
         }
     },
     es: {
@@ -50,6 +52,8 @@ const languageStrings = {
             LUGARES_MESSAGE: 'Puedes visitar lugares muy bonitos en San Felipe Orizatlán y hacer diferentes actividades, como por ejemplo, nadar en la Presa, acampar en las cabañas del Encinal, nadar junto a la cascada de Tultitlán, visitar el Rancho Tuzuntla o hacer senderismo en el famoso Cerro de Talol',
             COMIDA_MESSAGE: 'Cuando visites San Felipe Orizatlán, puedes probar el rico Pan hecho tradicionalmente, las deliciosas Enchiladas, riquisimos Tamales, entre otras comidas típicas de la región',
             MUSICA_MESSAGE: 'En San Felipe Orizatlán la música típica son los huapangos, banda de viendo, entre otros',
+            TRAJE_MESSAGE: 'El traje típico de los hombres en San Felipe Orizatlán incluye un calzón y cotón de manta, sombrero de palma de tancoco, huaraches de correa cruzada hechos en el municipio de Jaltocán, y un pañuelo rojo introducido de punta en la cintura. Las mujeres llevan una falda al tobillo de color liso o estampado, decorada con encaje y alforzas, y suelen llevar el cabello trenzado con listones y adornado con collares de fantasía.',
+            PERSONAJE_MESSAGE: 'San Felipe Orizatlán también es conocido por algunas figuras destacadas, como el profesor Ildefonso Maya, quien es reconocido por su conocimiento en la cosmogonía indígena y la relación de la comunidad con los ciclos agrícolas. Se le cita describiendo las actividades agrícolas y rituales que marcan el calendario de la comunidad, especialmente en torno a las festividades de Xantolo, que es la fiesta local del Día de Muertos, caracterizada por su rica tradición cultural y actividades que incluyen bailes, ofrendas y otros rituales comunitarios.',
         }
     }
 };
@@ -779,6 +783,7 @@ const MusicaTipicaIntentHandler = {
             const aplDirective = createDirectivePayloadMus(DOCUMENT_IDMus, datasourceMus);
             handlerInput.responseBuilder.addDirective(aplDirective);
         }
+        
         return handlerInput.responseBuilder
             .speak(musicaMessage)
             .reprompt(musicaMessage)
@@ -786,6 +791,134 @@ const MusicaTipicaIntentHandler = {
     }
 };
 
+//APL TRAJE TIPICO
+
+const DOCUMENT_IDTra = "TrajeTipicoApl";
+
+const datasourceTra = {
+    "imageListData": {
+        "type": "object",
+        "objectId": "paginatedListSample",
+        "title": "Trajes tipicos de san felipe orizatlan",
+        "listItems": [
+            {
+                "primaryText": "Traje tipico de Mujer",
+                "imageSource": "https://i.ytimg.com/vi/wpUoXWYJeI8/maxresdefault.jpg"
+            },
+            {
+                "primaryText": "Traje tipico Huapango",
+                "imageSource": "https://www.elsoldehidalgo.com.mx/local/52ykzi-conoce-los-3-trajes-tipicos-de-hidalgo-cual-es-el-mas-representativo/ALTERNATES/LANDSCAPE_960/Conoce%20los%203%20trajes%20t%C3%ADpicos%20de%20Hidalgo%20%C2%BFCu%C3%A1l%20es%20el%20m%C3%A1s%20representativo-"
+            },
+            {
+                "primaryText": "Traje tipico de Hombre",
+                "imageSource": "https://static.s123-cdn-static-c.com/uploads/2151198/2000_5cfae1bfc3d7b.png"
+            },
+            {
+                "primaryText": "Home Garden",
+                "secondaryText": "5 items",
+                "imageSource": "https://d2o906d8ln7ui1.cloudfront.net/images/templates_v3/paginatedlist/PaginatedList_Dark4.png"
+            }
+        ],
+        "logoUrl": "https://static.vecteezy.com/system/resources/previews/017/208/981/original/al-logo-monogram-letter-al-logo-design-al-letter-logo-design-vector.jpg"
+    }
+};
+
+const createDirectivePayloadTra = (aplDocumentId, dataSources = {}, tokenId = "documentToken") => {
+    return {
+        type: "Alexa.Presentation.APL.RenderDocument",
+        token: tokenId,
+        document: {
+            type: "Link",
+            src: "doc://alexa/apl/documents/" + aplDocumentId
+        },
+        datasources: dataSources
+    }
+};
+
+const TrajeTipicoIntentHandler = {
+    canHandle(handlerInput) {
+        // This handler is triggered by a specific intent called 'TrajeIntent'. Ensure this intent is defined in your Alexa interaction model.
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'TrajeTipicoIntent';
+    },
+    handle(handlerInput) {
+        // Retrieve the localized message string for traditional clothing from the skill's language settings.
+        const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
+        const trajeMessage = requestAttributes.t('TRAJE_MESSAGE');
+        
+        // Check if APL (Alexa Presentation Language) is supported by the user's device.
+        if (Alexa.getSupportedInterfaces(handlerInput.requestEnvelope)['Alexa.Presentation.APL']) {
+            const aplDirective = createDirectivePayloadTra(DOCUMENT_IDTra, datasourceTra);
+            handlerInput.responseBuilder.addDirective(aplDirective);
+        }
+        
+        // Construct the response using the speak method to say the traditional clothing message.
+        return handlerInput.responseBuilder
+            .speak(trajeMessage)
+            .reprompt(trajeMessage)  // Optionally add a reprompt to keep the session open for further interaction.
+            .getResponse();
+    }
+};
+
+//APL PERSONAJE TIPICO
+
+const DOCUMENT_IDPer = "PersonajesApl";
+
+const datasourcePer = {
+    "simpleTextTemplateData": {
+        "type": "object",
+        "properties": {
+            "backgroundImage": "https://upload.wikimedia.org/wikipedia/commons/0/09/Presid_orizatlan.JPG",
+            "foregroundImageLocation": "left",
+            "foregroundImageSource": "https://elemblob.blob.core.windows.net/media/screenshot-www5b0f1887cdac2_500w.png",
+            "headerTitle": "personajes importantes",
+            "headerSubtitle": "",
+            "hintText": "Desarrollador: Ángel de Jesús Lara Barrera",
+            "headerAttributionImage": "https://static.vecteezy.com/system/resources/previews/017/208/981/original/al-logo-monogram-letter-al-logo-design-al-letter-logo-design-vector.jpg",
+            "primaryText": "San Felipe Orizatlán también es conocido por algunas figuras destacadas, como el profesor Ildefonso Maya, quien es reconocido por su conocimiento en la cosmogonía indígena y la relación de la comunidad con los ciclos agrícolas. Se le cita describiendo las actividades agrícolas y rituales que marcan el calendario de la comunidad, especialmente en torno a las festividades de Xantolo, que es la fiesta local del Día de Muertos, caracterizada por su rica tradición cultural y actividades que incluyen bailes, ofrendas y otros rituales comunitarios.",
+            "textAlignment": "start",
+            "titleText": "Profesor Ildefonso Maya"
+        }
+    }
+};
+
+const createDirectivePayloadPer = (aplDocumentId, dataSources = {}, tokenId = "documentToken") => {
+    return {
+        type: "Alexa.Presentation.APL.RenderDocument",
+        token: tokenId,
+        document: {
+            type: "Link",
+            src: "doc://alexa/apl/documents/" + aplDocumentId
+        },
+        datasources: dataSources
+    }
+};
+
+const PersonajesIntentHandler = {
+    canHandle(handlerInput) {
+        // Checks if the intent being called is 'PersonajesIntent'
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'PersonajesIntent';
+    },
+    handle(handlerInput) {
+        // Retrieve request attributes to handle localization.
+        const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
+        // Retrieve the message for notable personalities from the language strings.
+        const personajesMessage = requestAttributes.t('PERSONAJE_MESSAGE');
+        
+        // Check if the device supports Alexa Presentation Language (APL).
+        if (Alexa.getSupportedInterfaces(handlerInput.requestEnvelope)['Alexa.Presentation.APL']) {
+            const aplDirective = createDirectivePayloadPer(DOCUMENT_IDPer, datasourcePer);
+            handlerInput.responseBuilder.addDirective(aplDirective);
+        }
+        
+        // Build the response with the retrieved message.
+        return handlerInput.responseBuilder
+            .speak(personajesMessage)
+            .reprompt(personajesMessage)  // Optionally add a reprompt to keep the session open.
+            .getResponse();
+    }
+};
 
 // This request interceptor will log all incoming requests to this lambda
 const LoggingRequestInterceptor = {
@@ -830,6 +963,8 @@ exports.handler = Alexa.SkillBuilders.custom()
         LugaresTuristicosIntentHandler,
         ComidaTipicaIntentHandler,
         MusicaTipicaIntentHandler,
+        TrajeTipicoIntentHandler,
+        PersonajesIntentHandler,
         LaunchRequestHandler,
         HelloWorldIntentHandler,
         HelpIntentHandler,
