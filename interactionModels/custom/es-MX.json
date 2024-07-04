@@ -1,0 +1,73 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "slots": [],
+          "name": "HelloWorldIntent",
+          "samples": [
+            "hola",
+            "como estás",
+            "di hola mundo",
+            "di hola",
+            "hola mundo"
+          ]
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "slots": [],
+          "name": "DescripcionIntent",
+          "samples": [
+            "describeme san felipe orizatlan",
+            "como es san felipe orizatlan",
+            "describe como es san felipe orizatlan"
+          ]
+        },
+        {
+          "slots": [],
+          "name": "LugaresTuristicosIntent",
+          "samples": [
+            "lugares para visitar en san felipe orizatlán",
+            "lugares bonitos en san felipe orizatlán",
+            "que hay que visitar en san felipe orizatlán",
+            "lugares turisticos en san felipe orizatlan"
+          ]
+        },
+        {
+          "slots": [],
+          "name": "ComidaTipicaIntent",
+          "samples": [
+            "comida tipica de san felipe orizatlan",
+            "dime comida tipica de san felipe orizatlan",
+            "cual es la comida tipica de san felipe orizatlan"
+          ]
+        },
+        {
+          "slots": [],
+          "name": "MusicaTipicaIntent",
+          "samples": [
+            "musica tipica de san felipe orizatlan",
+            "cual es la musica tipica de san felipe orizatlan"
+          ]
+        }
+      ],
+      "types": [],
+      "invocationName": "apl prueba"
+    }
+  }
+}

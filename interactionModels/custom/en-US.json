@@ -1,0 +1,73 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "slots": [],
+          "name": "HelloWorldIntent",
+          "samples": [
+            "hello",
+            "how are you",
+            "say hello world",
+            "say hello",
+            "Hello World"
+          ]
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "slots": [],
+          "name": "DescripcionIntent",
+          "samples": [
+            "describe san felipe orizatlan to me",
+            "what is san felipe orizatlan like",
+            "describe what san felipe orizatlan is like"
+          ]
+        },
+        {
+          "slots": [],
+          "name": "LugaresTuristicosIntent",
+          "samples": [
+            "places to visit in san felipe orizatlán",
+            "beautiful places in san felipe orizatlán",
+            "what you have to visit in san felipe orizatlán",
+            "Tourist places in San Felipe Orizatlan"
+          ]
+        },
+        {
+          "slots": [],
+          "name": "ComidaTipicaIntent",
+          "samples": [
+            "typical food of San Felipe Orizatlan",
+            "Tell me typical food from San Felipe Orizatlan",
+            "What is the typical food of San Felipe Orizatlan"
+          ]
+        },
+        {
+          "slots": [],
+          "name": "MusicaTipicaIntent",
+          "samples": [
+            "typical music of San Felipe Orizatlan",
+            "What is the typical music of San Felipe Orizatlan"
+          ]
+        }
+      ],
+      "types": [],
+      "invocationName": "apl prueba"
+    }
+  }
+}
